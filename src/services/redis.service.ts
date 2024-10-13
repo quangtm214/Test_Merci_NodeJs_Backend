@@ -1,11 +1,17 @@
 import redis, { createClient } from 'redis';
+import dotenv from 'dotenv';
+dotenv.config();
 import { promisify } from 'util';
 import inventoryRepo from '../repositories/inventory.repo';
 
+console.log('REDIS_URL:', process.env.REDIS_URL);
 const redisClient = createClient({
-    url: process.env.DEV_REDIS_URL
+    url: process.env.DEV_REDIS_URL,
+    socket: {
+        tls: true,
+        rejectUnauthorized: false
+    }
 });
-
 redisClient.on('error', (err) => console.log('Redis Client Error', err));
 
 (async () => {
