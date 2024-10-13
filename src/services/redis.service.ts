@@ -4,7 +4,7 @@ dotenv.config();
 import { promisify } from 'util';
 import inventoryRepo from '../repositories/inventory.repo';
 
-console.log('REDIS_URL:', process.env.REDIS_URL);
+console.log('REDIS_URL:', process.env.DEV_REDIS_URL);
 const redisClient = createClient({
     url: process.env.DEV_REDIS_URL,
     socket: {
